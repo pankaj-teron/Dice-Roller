@@ -8,12 +8,35 @@
     android:background="@drawable/background"
     android:padding="20dp">
 
+    <TextView
+        android:id="@+id/tvMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvScore"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Classic"
+        android:textSize="29dp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_below="@id/tvPlayer2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="29dp"
+        android:textColor="@android:color/black"
+        android:text="Score: 0 - 0"
+        android:textStyle="bold"/>
+
     <!-- Player Names -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
-
         android:orientation="horizontal"
         android:gravity="center">
 
@@ -22,10 +45,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Player 1"
-
             android:textSize="20sp"
             android:textColor="@android:color/white"
             android:layout_marginEnd="50dp"/>
+
 
         <TextView
             android:id="@+id/tvPlayer2"
@@ -52,7 +75,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
         android:gravity="center"
         android:layout_marginTop="50dp">
 

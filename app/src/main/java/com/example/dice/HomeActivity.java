@@ -5,40 +5,62 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private EditText player1Input, player2Input;
-    private Button startGameButton;
+    private EditText etPlayer1, etPlayer2;
+    private RadioGroup rgGameModes;
+    private Button btnStartGame;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Linking Views
-        player1Input = findViewById(R.id.etPlayer1);
-        player2Input = findViewById(R.id.etPlayer2);
-        startGameButton = findViewById(R.id.btnStartGame);
+        // Linking UI Elements
+        etPlayer1 = findViewById(R.id.etPlayer1);
+        etPlayer2 = findViewById(R.id.etPlayer2);
+        rgGameModes = findViewById(R.id.rgGameModes);
+        btnStartGame = findViewById(R.id.btnStartGame);
 
-        // Button Click Listener
-        startGameButton.setOnClickListener(new View.OnClickListener() {
+
+
+        // Start Game Button Click
+        btnStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get Player Names
-                String player1 = player1Input.getText().toString().trim();
-                String player2 = player2Input.getText().toString().trim();
+                String player1 = etPlayer1.getText().toString().trim();
+                String player2 = etPlayer2.getText().toString().trim();
 
-                // Default Names if Empty
-                if (player1.isEmpty()) player1 = "Player 1";
-                if (player2.isEmpty()) player2 = "Player 2";
+                // Ensure both names are entered
+                if (player1.isEmpty() || player2.isEmpty()) {
+                    Toast.makeText(HomeActivity.this, "Please enter both player names!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                // Start MainActivity & Pass Data
+
+                // Get selected game mode
+                int selectedModeId = rgGameModes.getCheckedRadioButtonId();
+                String gameMode = "Classic"; // Default mode
+                if (selectedModeId == R.id.rbBestOfThree) {
+                    gameMode = "BestOfThree";
+                } else if (selectedModeId == R.id.rbChallenge) {
+                    gameMode = "Race";
+                }
+
+
+                // Pass data to MainActivity
                 Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                 intent.putExtra("PLAYER_1", player1);
                 intent.putExtra("PLAYER_2", player2);
+                intent.putExtra("GAME_MODE", gameMode); //  Pass radio button-selected mode
                 startActivity(intent);
+
             }
         });
     }
